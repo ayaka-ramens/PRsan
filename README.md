@@ -1,43 +1,63 @@
-# PRsan
+# PRさん
+ツイートのアナリティクス値をスプレッドシートに転記するスクリプトです。 [twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/PRsan`. To experiment with that code, run `bin/console` for an interactive prompt.
+![prsan](https://user-images.githubusercontent.com/52645663/135459151-a88188ef-4b94-41ee-809a-1ea665d7f1de.gif)
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'PRsan'
+## インストール
+```bash
+$ gem install PRsan
+```
+## 使い方
+### 設定編
+#### 1. gemをインストール
+```bash
+$ bundle
 ```
 
-And then execute:
+#### 2. 設定ファイルをコピー
+```bash
+$ cp .env.sample .env
+$ cp spreadsheet_config_sample.json spreadsheet_config.json
+```
 
-    $ bundle install
+#### 3. Twitterアカウント申請
+[Twitter API](https://developer.twitter.com/en) を使用するにはTwitterアカウントを開発者として申請し
+APIを使用したいアプリ登録を行う必要があります。
 
-Or install it yourself as:
+[How to get access to the Ads API](https://developer.twitter.com/en/docs/twitter-ads-api/getting-started)
 
-    $ gem install PRsan
+アカウント申請、アプリ登録を行うと発行される以下の情報を `.env` に入力してください。
+- API_KEY
+- API_SECRET
+- ACCESS_TOKEN
+- ACCESS_TOKEN_SECRET
 
-## Usage
+#### 4. Google Drive APIとGoogle Sheets APIの有効化
+[Google API Console](https://console.cloud.google.com/apis/library) から新規プロジェクトを作成し、「Google Drive API」と「Google Sheets API」を有効化します。
+続いて、「APIとサービス」>「認証情報」、「認証情報を作成」>「OAuth クライアント ID」を選択します。「アプリケーションの種類」は「デスクトップアプリ」を選択します。そして、クライアントIDとクライアントシークレットが発行されます。
 
-TODO: Write usage instructions here
+２で作成した `spreadsheet_config.json` にクライアントIDとクライアントシークレットを入力してください。
 
-## Development
+#### 5. スプレットシートの準備
+[サンプルスプレッドシート](https://docs.google.com/spreadsheets/d/16NRgwRGX7-u9Y1UMuUOwi3tC-MHMUGn-pV5YRwYPchs/edit?usp=sharing) を参考にスプレッドシートを作成してください。
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+作成したシートのurl `https://docs.google.com/spreadsheets/d/XXXXXXXXXX/` の `XXXXXXXXXX` 部分を `.env` ファイルの `SPREADSHEET_KEY` に入力してください。
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### 使用編
+#### 1. スプレットシート加工
+取得したいツイートのURLをスプレッドシートA列(tweet_url)に貼り付けます。
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/PRsan. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/PRsan/blob/master/CODE_OF_CONDUCT.md).
+#### 2. コマンド実行
+gemのカレンとディレクトリで
+```bash
+$ bin/console
+```
+を入力し、
+```bash
+$ PRsan.tweet_analysis
+```
+を実行してください。
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the PRsan project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/PRsan/blob/master/CODE_OF_CONDUCT.md).
