@@ -30,7 +30,7 @@ module PRsan
           # 書き込み時にtweet_idを参照するので、tweet_id取得時に書き込んでおく
           @spreadsheet[row, TWEET_ID_COL] = $4.to_i
           @spreadsheet.save
-        elsif @spreadsheet[row, OVER_WRITE_COL] && Date.parse(@spreadsheet[row, CREATED_AT_COL]) > (Date.today - 30)
+        elsif @spreadsheet[row, OVER_WRITE_COL] == 'TRUE' && Date.parse(@spreadsheet[row, CREATED_AT_COL]) > (Date.today - 30)
           @spreadsheet[row, TWEET_URL_COL] =~ tweet_id_reg
           tweet_ids << $4
         else
