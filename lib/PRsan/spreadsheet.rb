@@ -1,4 +1,5 @@
 require "google_drive"
+require 'dotenv/load'
 
 module PRsan
   class Spreadsheet
@@ -14,8 +15,8 @@ module PRsan
     OVER_WRITE_COL = 10
 
     def initialize
-      google_drive_session = GoogleDrive::Session.from_config("spreadsheet_config.json")
-      @spreadsheet = google_drive_session.spreadsheet_by_key("1_K0LTtjcuT9zreULf0WIGPdjILADWI5D2wOGxJluGQY").worksheets[0]
+      google_drive_session = GoogleDrive::Session.from_config('spreadsheet_config.json')
+      @spreadsheet = google_drive_session.spreadsheet_by_key(ENV['SPREADSHEET_KEY']).worksheets[0]
     end
 
     def target_tweet_ids
@@ -26,7 +27,7 @@ module PRsan
         if @spreadsheet[row, TWEET_ID_COL] == ""
           @spreadsheet[row, TWEET_URL_COL] =~ tweet_id_reg
           tweet_ids << $4
-
+          # 書き込み時にtweet_idを参照するので、tweet_id取得時に書き込んでおく
           @spreadsheet[row, TWEET_ID_COL] = $4.to_i
           @spreadsheet.save
         elsif @spreadsheet[row, OVER_WRITE_COL] && Date.parse(@spreadsheet[row, CREATED_AT_COL]) > (Date.today - 30)
@@ -57,7 +58,7 @@ module PRsan
           end
         end
       end
-      puts "スプレッドシートへの書き込みが完了しました!\nhttps://docs.google.com/spreadsheets/d/1_K0LTtjcuT9zreULf0WIGPdjILADWI5D2wOGxJluGQY/edit#gid=0"
+      puts 'スプレッドシートへの書き込みが完了しました!'
     end
   end
 end
