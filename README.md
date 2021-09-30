@@ -1,5 +1,8 @@
 # PRさん
 ツイートのアナリティクス値をスプレッドシートに転記するスクリプトです。 [twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
+
+![prsan](https://user-images.githubusercontent.com/52645663/135459151-a88188ef-4b94-41ee-809a-1ea665d7f1de.gif)
+
 ## インストール
 ```bash
 $ gem install PRsan
