@@ -1,7 +1,9 @@
 # PRさん
-ツイートのアナリティクス値をスプレッドシートに転記するスクリプトです。 [twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
+ツイートのアナリティクス値をスプレッドシートに転記するスクリプトです。
 
-![prsan](https://user-images.githubusercontent.com/52645663/135459151-a88188ef-4b94-41ee-809a-1ea665d7f1de.gif)
+![prsan1](https://user-images.githubusercontent.com/52645663/135807740-64c5bd19-bb77-4161-9427-7685392d2166.gif)
+
+[twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
 
 ## インストール
 ```bash
@@ -39,10 +41,18 @@ APIを使用したいアプリ登録を行う必要があります。
 ２で作成した `spreadsheet_config.json` にクライアントIDとクライアントシークレットを入力してください。
 
 #### 5. スプレットシートの準備
-[サンプルスプレッドシート](https://docs.google.com/spreadsheets/d/16NRgwRGX7-u9Y1UMuUOwi3tC-MHMUGn-pV5YRwYPchs/edit?usp=sharing) を参考にスプレッドシートを作成してください。
+[サンプルスプレッドシート](https://docs.google.com/spreadsheets/d/16NRgwRGX7-u9Y1UMuUOwi3tC-MHMUGn-pV5YRwYPchs/edit?usp=sharing) を参考にスプレッドシートを作成してください。(データを取得したいツイートURLをA列(tweet_url)に貼り付けてください)
 
+作成したシートのurl `https://docs.google.com/spreadsheets/d/XXXXXXXXXX/` を `.env` ファイルの `SPREADSHEET_URL` に入力してください。
 作成したシートのurl `https://docs.google.com/spreadsheets/d/XXXXXXXXXX/` の `XXXXXXXXXX` 部分を `.env` ファイルの `SPREADSHEET_KEY` に入力してください。
 
+#### 6. Slack設定
+Slackにサインインして、 [Slack API Applications](https://api.slack.com/apps) にアクセスしてください。
+アプリを作成し、アプリ名や追加したいワークスペースの設定を行ってください。
+そして `Incoming Webhooks` を機能に追加し、Webhookをワークスペースに追加してください。
+発行されたWebhook URLを `.env` ファイルの `SLACK_WEBHOOK_URL` に入力してください。
+
+参照: [Incoming Webhook URL](https://api.slack.com/incoming-webhooks#posting_with_webhooks)
 ### 使用編
 #### 1. スプレットシート加工
 取得したいツイートのURLをスプレッドシートA列(tweet_url)に貼り付けます。
@@ -54,7 +64,7 @@ $ bin/console
 ```
 を入力し、
 ```bash
-$ PRsan.tweet_analysis
+$ PRsan.analysis_tweet
 ```
 を実行してください。
 
