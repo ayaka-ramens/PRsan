@@ -43,6 +43,7 @@ module PRsan
     end
 
     def write_analysis_data(tweets_data)
+      writed_count = 0
       tweets_data[:data].each do |tweet|
         (2..@spreadsheet.num_rows).each do |row|
           if @spreadsheet[row, TWEET_ID_COL] == tweet[:id]
@@ -55,10 +56,11 @@ module PRsan
             @spreadsheet[row, CREATED_AT_COL] = tweet[:created_at]
             @spreadsheet[row, OVER_WRITE_COL] = true
             @spreadsheet.save
+            writed_count += 1
           end
         end
       end
-      puts 'スプレッドシートへの書き込みが完了しました!'
+      writed_count
     end
   end
 end
