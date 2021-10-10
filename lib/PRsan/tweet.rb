@@ -14,8 +14,11 @@ module PRsan
 
     def get_tweets_data(tweet_ids)
       url = "https://api.twitter.com/2/tweets?ids=#{tweet_ids}&tweet.fields=created_at,public_metrics,non_public_metrics"
-      # TODO: エラーハンドリング
-      response = Twitter::REST::Request.new(@twitter_client, :get, url).perform
+      begin
+        response = Twitter::REST::Request.new(@twitter_client, :get, url).perform
+      rescue Twitter::Error => error
+        puts "エラーが発生しました。#{error.class} #{error.message}"
+      end
     end
   end
 end
