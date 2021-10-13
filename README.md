@@ -6,18 +6,24 @@
 [twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
 
 ## インストール
-```bash
-$ gem install PRsan
+1. リポジトリをクローン
+```
+$ git clone https://github.com/ayaka-ramens/PRsan.git
+```
+2. gemをインストール
+```
+$ cd PRsan
+$ bundle install
 ```
 ## 使い方
 ### 設定編
 #### 1. gemをインストール
-```bash
+```
 $ bundle
 ```
 
 #### 2. 設定ファイルをコピー
-```bash
+```
 $ cp .env.sample .env
 $ cp spreadsheet_config_sample.json spreadsheet_config.json
 ```
@@ -59,11 +65,11 @@ Slackにサインインして、 [Slack API Applications](https://api.slack.com/
 
 #### 2. コマンド実行
 gemのカレンとディレクトリで
-```bash
+```
 $ bin/console
 ```
 を入力し、
-```bash
+```
 $ PRsan.analysis_tweet
 ```
 を実行してください。
