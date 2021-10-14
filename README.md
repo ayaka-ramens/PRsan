@@ -35,10 +35,10 @@ APIを使用したいアプリ登録を行う必要があります。
 [How to get access to the Ads API](https://developer.twitter.com/en/docs/twitter-ads-api/getting-started)
 
 アカウント申請、アプリ登録を行うと発行される以下の情報を `.env` に入力してください。
-- API_KEY
-- API_SECRET
-- ACCESS_TOKEN
-- ACCESS_TOKEN_SECRET
+- TWITTER_API_KEY
+- TWITTER_API_SECRET
+- TWITTER_ACCESS_TOKEN
+- TWITTER_ACCESS_TOKEN_SECRET
 
 #### 4. Google Drive APIとGoogle Sheets APIの有効化
 [Google API Console](https://console.cloud.google.com/apis/library) から新規プロジェクトを作成し、「Google Drive API」と「Google Sheets API」を有効化します。
