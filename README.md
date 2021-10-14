@@ -6,18 +6,24 @@
 [twitter](https://github.com/sferik/twitter) gemと [google_drive](https://github.com/gimite/google-drive-ruby) gemを使っています。
 
 ## インストール
-```bash
-$ gem install PRsan
+1. リポジトリをクローン
+```
+$ git clone https://github.com/ayaka-ramens/PRsan.git
+```
+2. gemをインストール
+```
+$ cd PRsan
+$ bundle install
 ```
 ## 使い方
 ### 設定編
 #### 1. gemをインストール
-```bash
+```
 $ bundle
 ```
 
 #### 2. 設定ファイルをコピー
-```bash
+```
 $ cp .env.sample .env
 $ cp spreadsheet_config_sample.json spreadsheet_config.json
 ```
@@ -29,10 +35,10 @@ APIを使用したいアプリ登録を行う必要があります。
 [How to get access to the Ads API](https://developer.twitter.com/en/docs/twitter-ads-api/getting-started)
 
 アカウント申請、アプリ登録を行うと発行される以下の情報を `.env` に入力してください。
-- API_KEY
-- API_SECRET
-- ACCESS_TOKEN
-- ACCESS_TOKEN_SECRET
+- TWITTER_API_KEY
+- TWITTER_API_SECRET
+- TWITTER_ACCESS_TOKEN
+- TWITTER_ACCESS_TOKEN_SECRET
 
 #### 4. Google Drive APIとGoogle Sheets APIの有効化
 [Google API Console](https://console.cloud.google.com/apis/library) から新規プロジェクトを作成し、「Google Drive API」と「Google Sheets API」を有効化します。
@@ -59,11 +65,11 @@ Slackにサインインして、 [Slack API Applications](https://api.slack.com/
 
 #### 2. コマンド実行
 gemのカレンとディレクトリで
-```bash
+```
 $ bin/console
 ```
 を入力し、
-```bash
+```
 $ PRsan.analysis_tweet
 ```
 を実行してください。
